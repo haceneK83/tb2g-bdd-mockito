@@ -7,17 +7,14 @@ import guru.springframework.sfgpetclinic.services.OwnerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -66,6 +63,7 @@ class OwnerControllerTest {
     void processCreationFormWildcardFound(){
         // given
         Owner owner = new Owner(1L, "Joe", "FindMe");
+        InOrder inOrder = Mockito.inOrder(ownerService, model);
 
         // when
         String viewName = controller.processFindForm(owner, bindingResult, model);
@@ -73,6 +71,12 @@ class OwnerControllerTest {
         // then
         assertThat("%FindMe%").isEqualToIgnoringCase(stringArgumentCaptor.getValue());
         assertThat("owners/ownersList").isEqualToIgnoringCase(viewName);
+
+        // inorder assertions
+        inOrder.verify(ownerService).findAllByLastNameLike(anyString());
+        inOrder.verify(model).addAttribute(anyString(), anyList());
+
+
     }
 
     @Test
