@@ -8,15 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.swing.text.html.Option;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class SpecialitySDJpaServiceTest {
@@ -86,7 +84,7 @@ class SpecialitySDJpaServiceTest {
         service.deleteById(1L);
 
         // then
-        then(specialtyRepository).should(atMost(5)).deleteById(1l);
+        then(specialtyRepository).should(atMost(5)).deleteById(1L);
     }
 
     @Test
