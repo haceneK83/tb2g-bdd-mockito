@@ -27,10 +27,13 @@ class SpecialitySDJpaServiceTest {
 
     @Test
     void testDeleteByObject() {
+        // given
         Speciality speciality = new Speciality();
 
+        // when
         service.delete(speciality);
 
+        // then
         verify(specialtyRepository).delete(any(Speciality.class));
     }
 
