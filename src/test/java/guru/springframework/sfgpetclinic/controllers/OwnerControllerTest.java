@@ -47,15 +47,16 @@ class OwnerControllerTest {
         .willAnswer( invocation -> {
             List<Owner> owners = new ArrayList<>();
             String name = invocation.getArgument(0);
-            if( name.equals("%Buck%")){
-                owners.add(new Owner(1L, "Joe", "Buck"));
-                return owners;
-            } else if ( name.equals("%DontFindMe%") ){
-                return owners;
-            }  else if ( name.equals("%FindMe%") ){
-                owners.add(new Owner(1L, "Joe", "Buck"));
-                owners.add(new Owner(1L, "Joe2", "Buck2"));
-                return owners;
+            switch (name) {
+                case "%Buck%":
+                    owners.add(new Owner(1L, "Joe", "Buck"));
+                    return owners;
+                case "%DontFindMe%":
+                    return owners;
+                case "%FindMe%":
+                    owners.add(new Owner(1L, "Joe", "Buck"));
+                    owners.add(new Owner(1L, "Joe2", "Buck2"));
+                    return owners;
             }
             throw  new RuntimeException("Invalid Argument");
         });
