@@ -87,7 +87,6 @@ class VisitSDJpaServiceTest {
         // then
         then(visitRepository).should().delete(any(Visit.class));
         verify(visitRepository).delete(any(Visit.class));
-
     }
 
     @Test
