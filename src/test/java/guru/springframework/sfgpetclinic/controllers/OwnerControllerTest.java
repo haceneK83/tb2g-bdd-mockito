@@ -45,7 +45,7 @@ class OwnerControllerTest {
         given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(ownerList);
 
         // when
-        String viewName = controller.processFindForm(owner, bindingResult, null);
+       controller.processFindForm(owner, bindingResult, null);
 
         // then
         assertThat("%Buck%").isEqualToIgnoringCase(captor.getValue());
@@ -59,7 +59,7 @@ class OwnerControllerTest {
         given(ownerService.findAllByLastNameLike(stringArgumentCaptor.capture())).willReturn(ownerList);
 
         // when
-        String viewName = controller.processFindForm(owner, bindingResult, null);
+        controller.processFindForm(owner, bindingResult, null);
 
         // then
         assertThat("%Buck%").isEqualToIgnoringCase(stringArgumentCaptor.getValue());
